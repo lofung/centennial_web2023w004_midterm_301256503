@@ -52,7 +52,7 @@ router.post('/add', async (req, res, next) => {
     try{
       const result = await new_entry.save()
       console.log(result)
-      res.redirect(303, "/")
+      res.redirect(303, "/books")
     } catch(e){
       console.error(e)
     }
@@ -94,7 +94,7 @@ router.post('/:id', async (req, res, next) => {
     try{
       const result = await book.findOneAndUpdate(_id, {Title, Price, Author, Genre})
       console.log(result)
-      res.redirect(303, "/")
+      res.redirect(303, "/books")
     } catch(e){
       console.error(e)
     }
@@ -102,11 +102,21 @@ router.post('/:id', async (req, res, next) => {
 );
 
 // GET - process the delete by user id
-router.get('/delete/:id', (req, res, next) => {
+router.get('/delete/:id', async (req, res, next) => {
 
     /*****************
      * ADD CODE HERE *
      *****************/
+    const _id = req.params.id
+    //const new_entry = new book({Title, Price, Author, Genre})
+    //console.log(new_entry)
+    try{
+      const result = await book.findByIdAndDelete(_id)
+      console.log(result)
+      res.redirect(303, "/books")
+    } catch(e){
+      console.error(e)
+    }
 });
 
 

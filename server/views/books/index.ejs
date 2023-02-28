@@ -1,5 +1,5 @@
 <% include ../partials/header.ejs %>
-
+    <!-- //LAU KWAN KIT 301256503 Centennial web midterm-->
     <!-- MAIN CONTENT -->
     <div class="container">
       <div class="row">
@@ -35,14 +35,14 @@
                     <!-- ------------------------ -->
                     <!-- ADD the EDIT BUTTON HERE -->
                     <!-- ------------------------ -->
-                    <a data-method="post" href="/books/<%= books[count]._id %>" style="text-decoration: none">edit</a>
+                    <a href="/books/<%= books[count]._id %>" style="text-decoration: none">edit</a>
                   </td>
 
                   <td class="text-center">
                     <!-- ------------------------ -->
                     <!-- ADD the DELETE BUTTON HERE -->
                     <!-- ------------------------ -->
-                    <a data-method="delete" href="/books/<%= books[count]._id %>" style="text-decoration: none">delete</a>
+                    <a href="/books/delete/<%= books[count]._id %>" style="text-decoration: none">delete</a>
                   </td>
                 </tr>
                 <% } %>
