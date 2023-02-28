@@ -69,21 +69,37 @@ router.get('/:id', async (req, res, next) => {
     const _id = req.params.id
     const tempAllContacts = await book.find({_id})
     const allContacts = JSON.parse(JSON.stringify(tempAllContacts))
+    console.log(allContacts)
     res.render('books/details', {
       title: 'Edit book',
-      books: allContacts
+      books: allContacts[0]
     });
     //res.json(allContacts)
 });
 
 // POST - process the information passed from the details form and update the document
-router.post('/:id', (req, res, next) => {
+router.post('/:id', async (req, res, next) => {
 
     /*****************
      * ADD CODE HERE *
      *****************/
-
-});
+    //console.log(req.body)
+    const _id = req.params.id
+    const Title = req.body.title
+    const Price = req.body.price
+    const Author = req.body.author
+    const Genre = req.body.genre
+    //const new_entry = new book({Title, Price, Author, Genre})
+    //console.log(new_entry)
+    try{
+      const result = await book.findOneAndUpdate(_id, {Title, Price, Author, Genre})
+      console.log(result)
+      res.redirect(303, "/")
+    } catch(e){
+      console.error(e)
+    }
+  }
+);
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
